@@ -4,11 +4,13 @@ import random
 import time
 from IPython.display import clear_output
 
+#environment is being taken from gym
 env = gym.make("FrozenLake-v0")
 
 action_space_size = env.action_space.n
 state_space_size = env.observation_space.n
 
+#initializing required variables
 q_table = np.zeros((state_space_size, action_space_size))
 
 num_episodes = 10000
@@ -69,21 +71,24 @@ print(q_table)
 
 
 #Watch Agent play Frozen Lake with best action
-
+#outer for loop is for each episode
 for episode in range(3):
     state =  env.reset()
     done = False
     print("*****EPISODE ", episode+1, "*****\n\n\n\n")
     time.sleep(1)
-
+    
+    #Inner for loop is for each step/action in the episode 
     for step in range(max_steps_per_episode):
         clear_output(wait=True)
         env.render()
         time.sleep(0.3)
-
+        
+        #choosing the best action from Q-table
         action = np.argmax(q_table[state,:])        
         new_state, reward, done, info = env.step(action)
-
+        
+        #checking if episode ended
         if done:
             clear_output(wait=True)
             env.render()
