@@ -17,6 +17,5 @@ Each file is the implementation of the same Q-learning algorithm for the respect
 Side Note: The rewards in FrozenLake-v0 are +1 for reaching the goal and 0 for falling in a hole. The rewards in Taxi-v3 are +20 points for a successful dropoff, -1 for each timestep, and -10 for illegal dropoff/pickup.
 
 The links for the source code of the environments are:
-
 https://github.com/openai/gym/blob/master/gym/envs/toy_text/taxi.py
 https://github.com/openai/gym/blob/master/gym/envs/toy_text/frozen_lake.py
