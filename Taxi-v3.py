@@ -4,11 +4,13 @@ import random
 import time
 from IPython.display import clear_output
 
+#environment is being taken from gym
 env = gym.make("Taxi-v3")
 
 action_space_size = env.action_space.n
 state_space_size = env.observation_space.n
 
+#initializing required variables
 q_table = np.zeros((state_space_size, action_space_size))
 
 num_episodes = 10000
@@ -68,28 +70,33 @@ print("\n\n Q-table \n")
 print(q_table)
 
 
-#Watch Agent play Frozen Lake with best action
-
+#Watch Agent play Taxi with best action
+#outer for loop is for each episode
 for episode in range(20):
     state =  env.reset()
     done = False
     print("*****EPISODE ", episode+1, "*****\n\n\n\n")
     time.sleep(1)
-
+    
+    #Inner for loop is for each step/action in the episode
     for step in range(max_steps_per_episode):
         clear_output(wait=True)
         env.render()
         time.sleep(0.3)
-
+        
+        #choosing the best action from Q-table
         action = np.argmax(q_table[state,:])
         new_state, reward, done, info = env.step(action)
-
+        
+        #Checking if chosen action is pickup or dropoff
         if ((action == 5) or (action == 4)):
             clear_output(wait=True)
             env.render()
             print(new_state)
 
+            #If pickup, then check if it's illegal pickup or not
             if(action == 4):
+                #Each state is the possible combination of pickup and dropoff locations
                 if ((new_state == 19) or (new_state == 99) or (new_state == 417) or (new_state == 477) or (new_state == 419) or (new_state == 416) or (new_state == 17) or (new_state == 478) or (new_state == 18) or (new_state == 96) or (new_state == 476) or (new_state == 98)):
                     state = new_state
                     continue
@@ -98,8 +105,9 @@ for episode in range(20):
                     time.sleep(3)
                     clear_output(wait=True)
                     break
-
+            #If dropoff, then check if it's illegal or not
             if(action == 5):
+                #Each state is according to the four possible destinations
                 if ((new_state == 85) or (new_state == 0) or (new_state == 410) or (new_state == 475)):
                     print("****Successful Dropoff!****")
                     time.sleep(3)
