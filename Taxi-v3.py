@@ -92,7 +92,6 @@ for episode in range(20):
         if ((action == 5) or (action == 4)):
             clear_output(wait=True)
             env.render()
-            print(new_state)
 
             #If pickup, then check if it's illegal pickup or not
             if(action == 4):
