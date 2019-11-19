@@ -13,12 +13,15 @@ state_space_size = env.observation_space.n
 #initializing required variables
 q_table = np.zeros((state_space_size, action_space_size))
 
+#Can be varied to see how the agent tries to play the game later on with lesser experience
 num_episodes = 10000
 max_steps_per_episode = 100
 
+#Using this, changes the rate at which the agent learns and how much it should look into the future for rewards
 learning_rate = 0.1
 discount_rate = 0.99
 
+#Determines the rate at which the agent explore's the environment
 exploration_rate = 1
 max_exploration_rate = 1
 min_exploration_rate = 0.01
